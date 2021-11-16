@@ -1,4 +1,4 @@
-# Project 3 - Retween
+# Project 3 - Retweet
 #### By Donovan Gallaway, Marco De Los Santos, and Mitchell Paoletti
 
 ## Project Summary
