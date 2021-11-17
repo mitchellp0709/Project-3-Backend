@@ -25,6 +25,7 @@ If we wind up with enough time, we will add a comments/replies schema, but that'
 ### Tweet Schema
 - Username (String)
 - Tweet Content (String)
+- Follows
 - Comments // For later implementation
 
 
