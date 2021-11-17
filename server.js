@@ -9,7 +9,7 @@
  const cors = require('cors')
  const app = express()
  const AuthRouter = require('./controllers/user')
- const auth = './auth/index.js'
+ const auth = require('./auth/index.js')
 
  const {PORT,DATABASE_URL} = process.env
 
