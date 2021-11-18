@@ -22,11 +22,13 @@ router.get('/:user', async (req,res) => {
 })
 
 // unfollow a user
-// router.put('/follow/delete/:thisUser/:followUser', async (req,res) => {
-//     const thisUserId = req.params.thisUser
-//     const followUserId = req.params.followUser
-//     const followName = await User.findById(followUserId)
-// })
+router.put('/unfollow/:thisUser/:followUser', async (req,res) => {
+    const thisUserId = req.params.thisUser
+    const followUserId = req.params.followUser
+    const followName = await User.findById(followUserId)
+    console.log(followName.username)
+    res.status(200).json(await User.findByIdAndUpdate(thisUserId, {$pull: {follows: followName.username}}, {new:true}))
+})
 
 // follow a user
 router.put('/follow/:thisUser/:followUser', async (req,res) => {
