@@ -20,8 +20,9 @@ router.post('/signup', async (req,res) => {
 
 router.post('/login', async (req,res) => {
     try{
-        const {username, password} = req.body
-        const user = await User.find({username})
+        const username = req.body.username
+        const password= req.body.password
+        const user = await User.findOne({username})
         if (user){
             const match = await bcrypt.compare(password, user.password)
             if(match){
@@ -34,12 +35,17 @@ router.post('/login', async (req,res) => {
             res.status(400).json({error: "user does not exist"})
         }
     } catch(error){
-        res.status(400).json({error})
+        res.status(400).json(error)
     }
 })
 
-
-
+router.get('/', async (req,res) => {
+    try {
+        res.status(200).json(await User.find({}))
+    } catch (error){
+        res.status(400).json({error})
+    }
+})
 
 
 
