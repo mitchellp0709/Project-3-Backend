@@ -10,6 +10,7 @@
  const app = express()
  const AuthRouter = require('./controllers/user')
  const auth = require('./auth/index.js')
+ const TweetRouter = require('./controllers/tweet')
 
  const {PORT,DATABASE_URL} = process.env
 
@@ -37,6 +38,7 @@ app.get('/', auth, (req,res)=>{
 
 //Routers
 app.use('/auth', AuthRouter)
+app.use('/tweet', TweetRouter)
 
 // Listener
 app.listen(PORT, () => {console.log('listening on port', PORT)})

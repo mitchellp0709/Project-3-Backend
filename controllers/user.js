@@ -39,6 +39,14 @@ router.post('/login', async (req,res) => {
     }
 })
 
+router.get('/', async (req,res) => {
+    try {
+        res.status(200).json(await User.find({}))
+    } catch (error){
+        res.status(400).json({error})
+    }
+})
+
 
 
 

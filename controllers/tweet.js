@@ -1,14 +1,14 @@
 const Tweet = require('../models/tweet')
 const User = require('../models/user')
-const {Router, application} = require('express')
+const {Router} = require('express')
 const router = Router()
 
 
-router.get('/tweet/:user', async (req,res) => {
-    const user = req.params.user
+router.get('/:user', async (req,res) => {
+    const user = req.params.user // this should be an ID for that user's MongoDB entry, not a username
     try {
-        const thisUser = await User.find({username: user})
-        const friends = thisUser.friends
+        const thisUser = await User.find({_id: user})
+        const friends = thisUser.follows
         const friendsTweets = await []
         for (friend of friends){
             const tweets = await Tweet.find({username: friend.username})
@@ -21,7 +21,7 @@ router.get('/tweet/:user', async (req,res) => {
     }
 })
 
-router.post('/tweet', async (req,res) => {
+router.post('/', async (req,res) => {
     try {
         res.status(200).json(await Tweet.create(req.body))
     } catch ({error}) {
@@ -29,7 +29,7 @@ router.post('/tweet', async (req,res) => {
     }
 })
 
-router.put('/tweet/:id', async (req,res) => {
+router.put('/:id', async (req,res) => {
     const id = req.params.id
     try {
         res.status(200).json(await Tweet.findByIdAndUpdate(id,req.body,{new:true}))
@@ -38,7 +38,7 @@ router.put('/tweet/:id', async (req,res) => {
     }
 })
 
-router.delete('/tweet/:id', async (req,res) => {
+router.delete('/:id', async (req,res) => {
     const id = req.params.id
     try {
         res.status(200).json(await Tweet.findByIdAndRemove(id))
@@ -46,3 +46,6 @@ router.delete('/tweet/:id', async (req,res) => {
         res.status(400).json({error})
     }
 })
+
+
+module.exports = router
