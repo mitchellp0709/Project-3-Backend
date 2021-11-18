@@ -8,6 +8,8 @@ const tweetSchema = new Schema({
 }, {timestamps: true})
 
 
+
 const Tweet = model('Tweet', tweetSchema)
+
 
 module.exports = Tweet

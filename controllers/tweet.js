@@ -1,5 +1,6 @@
 const Tweet = require('../models/tweet')
 const User = require('../models/user')
+
 const {Router} = require('express')
 const router = Router()
 
@@ -9,6 +10,7 @@ router.get('/:user', async (req,res) => {
     try {
         const thisUser = await User.find({_id: user})
         const friends = thisUser.follows
+
         const friendsTweets = await []
         for (friend of friends){
             const tweets = await Tweet.find({username: friend.username})
@@ -29,7 +31,9 @@ router.post('/', async (req,res) => {
     }
 })
 
+
 router.put('/:id', async (req,res) => {
+
     const id = req.params.id
     try {
         res.status(200).json(await Tweet.findByIdAndUpdate(id,req.body,{new:true}))
@@ -39,13 +43,16 @@ router.put('/:id', async (req,res) => {
 })
 
 router.delete('/:id', async (req,res) => {
+
     const id = req.params.id
     try {
         res.status(200).json(await Tweet.findByIdAndRemove(id))
     } catch (error){
         res.status(400).json({error})
     }
+
 })
 
 
 module.exports = router
+
