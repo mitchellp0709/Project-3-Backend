@@ -47,6 +47,14 @@ router.get('/', async (req,res) => {
     }
 })
 
+router.get('/:id', async (req,res) => {
+    try {
+        res.status(200).json(await User.findById(req.params.id))
+    } catch (error){
+        res.status(400).json({error})
+    }
+})
+
 
 
 module.exports = router

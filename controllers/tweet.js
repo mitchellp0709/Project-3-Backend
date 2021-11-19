@@ -29,7 +29,9 @@ router.put('/unfollow/:thisUser/:followUser', async (req,res) => {
     const followUserId = req.params.followUser
     const followName = await User.findById(followUserId)
     console.log(followName.username)
-    res.status(200).json(await User.findByIdAndUpdate(thisUserId, {$pull: {follows: followName.username}}, {new:true}))
+
+    res.status(200).json(await User.findByIdAndUpdate(thisUserId, {$pull: {follows: followName._id}}, {new:true}))
+
 })
 
 // follow a user
@@ -38,7 +40,9 @@ router.put('/follow/:thisUser/:followUser', async (req,res) => {
     const followUserId = req.params.followUser
     const followName = await User.findById(followUserId)
     console.log(followName.username)
-    res.status(200).json(await User.findByIdAndUpdate(thisUserId, {$push: {follows: [followName.username]}}, {new:true}))
+
+    res.status(200).json(await User.findByIdAndUpdate(thisUserId, {$push: {follows: [followName._id]}}, {new:true}))
+
 })
 
 
