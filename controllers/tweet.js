@@ -5,6 +5,15 @@ const {Router} = require('express')
 const router = Router()
 
 
+router.get('/oneTweet/:id', async (req,res) => {
+    const id = req.params.id
+    try {
+        res.status(200).json(await Tweet.findById(id))
+    } catch(error){
+        res.status(400).json({error})
+    }
+})
+
 router.get('/:user', async (req,res) => {
     const user = req.params.user // this should be an ID for that user's MongoDB entry, not a username
     try {
