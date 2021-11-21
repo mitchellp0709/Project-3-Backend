@@ -11,7 +11,7 @@ router.get('/:user', async (req,res) => {
         const thisUser = await User.findById(user)
         const friends = thisUser.follows
 
-        const friendsTweets = await []
+        const friendsTweets = []
         for (friend of friends){
             const tweets = await Tweet.find({username: friend.username})
             friendsTweets.push(tweets)
