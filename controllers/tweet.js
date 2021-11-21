@@ -9,16 +9,20 @@ router.get('/:user', async (req,res) => {
     const user = req.params.user // this should be an ID for that user's MongoDB entry, not a username
     try {
         const thisUser = await User.findById(user)
-        const friends = thisUser.follows
-
-        const friendsTweets = []
-        for (friend of friends){
-            const tweets = await Tweet.find({username: friend.username})
-            friendsTweets.push(tweets)
+        const followArray = await thisUser.follows
+        console.log(followArray)
+        const userArray = []
+        for (item of followArray){
+            userArray.push(await User.findById(item))
         }
-        res.status(200).json(friendsTweets)
-
-    } catch (error){
+        const tweetArray = []
+        for (item of userArray){
+            tweetArray.push(await Tweet.find({username: item.username}))
+        }
+        console.log(tweetArray)
+        res.status(200).json(tweetArray)
+        }        
+    catch (error){
         res.status(400).json({error})
     }
 })
