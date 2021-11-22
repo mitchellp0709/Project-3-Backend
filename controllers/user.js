@@ -63,6 +63,15 @@ router.get('/user/:username', async (req,res) => {
     }
 })
 
+router.put("/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    res.status(200).json(await User.findByIdAndUpdate(id, req.body, { new: true }));
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+})
+
 
 
 module.exports = router
