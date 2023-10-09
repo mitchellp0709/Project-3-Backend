@@ -16,6 +16,7 @@
 
  //const {PORT,DATABASE_URL} = process.env
 
+ //Delete below and uncomment above if things go wrong
 const DATABASE_URL = process.env
 let PORT = process.env.PORT || 8999
 
