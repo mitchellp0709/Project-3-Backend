@@ -14,7 +14,10 @@
  const TweetRouter = require('./controllers/tweet')
 
 
- const {PORT,DATABASE_URL} = process.env
+ //const {PORT,DATABASE_URL} = process.env
+
+const DATABASE_URL = process.env
+let PORT = process.env.PORT || 8999
 
  
  module.exports = mongoose
